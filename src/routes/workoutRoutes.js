@@ -5,7 +5,7 @@ const Workout = mongoose.model('Workout');
 
 const router = express.Router();
 
-// router.use(requireAuth);
+router.use(requireAuth);
 
 router.get('/workout', async (req, res) => {
     try {
@@ -13,8 +13,12 @@ router.get('/workout', async (req, res) => {
             { $match: { mainMuscle: req.query.muscle } },
             { $sample: { size: 1 } }
         ])
-        // Workout.find({ name: "Standing Barbell Curl" });
-        res.send(workout);
+
+        if (workout.length < 1 || workout === undefined) {
+            throw 'No data found.';
+        } else {
+            res.send(workout);
+        }
     } catch (err) {
         res.status(422).send({ error: err.message });
     }
