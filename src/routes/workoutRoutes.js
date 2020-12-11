@@ -7,6 +7,11 @@ const router = express.Router();
 
 router.use(requireAuth);
 
+/********************************************************************
+ * NAME: GET workout 
+ * DESCRIPTION: Get endpoint to query the database for a random workout
+ * for the muscle supplied by the client.
+ *******************************************************************/
 router.get('/workout', async (req, res) => {
     try {
         const workout = await Workout.aggregate([
@@ -24,6 +29,10 @@ router.get('/workout', async (req, res) => {
     }
 });
 
+/********************************************************************
+ * NAME: POST workout
+ * DESCRIPTION: Post endpoint add a workout to the database. 
+ *******************************************************************/
 router.post('/workout', async (req, res) => {
     const { name, image, description, mainMuscle, otherMuscles, steps } = req.body;
 

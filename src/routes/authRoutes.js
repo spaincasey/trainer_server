@@ -4,7 +4,11 @@ const jwt = require('jsonwebtoken');
 const User = mongoose.model('User');
 
 const router = express.Router();
-
+/********************************************************************
+ * NAME: signup
+ * DESCRIPTION: Post endpoint to add a new user to the database and send a 
+ * JWT token back to the client.
+ *******************************************************************/
 router.post('/signup', async (req, res) => {
     const { email, password } = req.body;
 
@@ -19,6 +23,11 @@ router.post('/signup', async (req, res) => {
     }
 });
 
+/********************************************************************
+ * NAME: signin
+ * DESCRIPTION: Post endpoint sign a user in and return a JWT Token 
+ * to the client.
+ *******************************************************************/
 router.post('/signin', async (req, res) => {
     const { email, password } = req.body;
 
